@@ -9,10 +9,10 @@ Resource  ../../../resources/components/upload/upload_file_modal.robot
 #################################################
 
 *** Test Cases ***
-Verify image uploading
+Verify Upload Smartcard Creation
     [Tags]                                  regression
     [Teardown]                              Close Browser
-	Open Connection With Valid Credentials  ${USER_EMAIL_${ENV}}	 ${USER_PASSWORD_${ENV}}
+    Open Connection With Valid Credentials  ${USER_EMAIL_${ENV}}	 ${USER_PASSWORD_${ENV}}
     Click Create Button
     Click Smartcard Button
     Click Uploaded Content Tab
@@ -20,5 +20,12 @@ Verify image uploading
     Upload File                             ${CURDIR}/../../../output/test_upload.png
     Click Upload Button
     Wait Until Image Uploaded
-    
-    
+    Type Smart Card Title                   Some card title
+    Type Smart Card Description             Some card decription
+    Select Skills                           Kubernetes   Python
+    Type Tags                               Tag1   Tag2
+    Select Language                         English
+    Select Content Type                     Article
+    Select Duration                         1   20
+    Set Privacy Settings                    Private
+    Click Create Card Button
