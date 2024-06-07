@@ -14,17 +14,17 @@ Open Connection With Valid Credentials
     ...    accordingly in config.robot
     
     Open Browser To Page		    ${BROWSER}
-	Login With Given User Name		${user_email}		${user_password}
+    Login With Given User Name		${user_email}		${user_password}
 
 ###############################################################################################
 Login With Given User Name
     [Arguments]	  ${user_email}    ${user_password}
     [Documentation]    Takes user to the login page and logine User with valid credential
     Delete All Cookies
-  	Type User Email       ${user_email}
-  	Type User Password    ${user_password}
-  	Select Terms And Conditions Checkbox
-  	Click Log In Buttton
+    Type User Email       ${user_email}
+    Type User Password    ${user_password}
+    Select Terms And Conditions Checkbox
+    Click Log In Buttton
     Wait Until Location Does Not Contain     /user/login       15s        User doesn't log in
 
 ###############################################################################################
@@ -56,7 +56,7 @@ Open Browser To Page
 Wait and Click    
     [Arguments]   ${locator}
     Wait Until Element Is Visible               ${locator}         ${TIMEOUT}
-	Click Element								${locator}
+    Click Element								${locator}
 
 ###############################################################################################
 Wait and Type   
