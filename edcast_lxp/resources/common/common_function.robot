@@ -25,13 +25,13 @@ Login With Given User Name
   	Type User Password    ${user_password}
   	Select Terms And Conditions Checkbox
   	Click Log In Buttton
-    Wait Until Location Contains    /me       15s        User doesn't log in
+    Wait Until Location Does Not Contain     /user/login       15s        User doesn't log in
 
 ###############################################################################################
 Logout User
   	Click Profile Dropdown Button
   	Click Sign Out Button
-    Wait Until Location Does Not Contain    /me       15s        User doesn't log out
+    Wait Until Location Contains    /user/login       15s        User doesn't log out
   
  ############################################################################################### 
 Open Browser To Page	
