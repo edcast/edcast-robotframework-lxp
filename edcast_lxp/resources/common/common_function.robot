@@ -63,3 +63,15 @@ Wait and Type
    [Arguments]     ${locator}     ${text}
    Wait Until Element Is Visible               ${locator}         ${TIMEOUT}
    Input Text                                  ${locator}         ${text}
+
+###############################################################################################
+Compare Images
+   [Arguments]      ${reference_image_path}    ${test_image_path}    ${allowed_threshold}
+   ${temp}=         Replace String     ${IMAGE_COMPARATOR_COMMAND}    expected_image_path     ${reference_image_path}
+   ${command}=      Replace String     ${temp}    tested_image_path     ${test_image_path}
+   Log              Executing: ${command}
+   ${rc}            ${output}=     Run And Return Rc And Output     ${command}
+   Log              Return Code: ${rc}
+   Log              Return Output: ${output}
+   ${result}        Evaluate    ${output} < ${allowed_threshold}
+   Should be True   ${result}
