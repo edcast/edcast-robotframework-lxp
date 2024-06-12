@@ -41,9 +41,22 @@ Open Browser To Page
     ${SELENIUM_GRID_HUB}=        Set Variable If        "${BROWSER}"=="edge"         http://localhost:9515         ${SELENIUM_GRID_HUB}          
     Set Suite Variable    ${desire_capabilities}
 
+    #${options} =    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
+    #CALL METHOD     ${options}      set_capability      enableVideo     true
+    #CALL METHOD     ${options}      set_capability      enableVNC       true
+
     ${options} =    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    CALL METHOD     ${options}      set_capability      enableVideo     true
-    CALL METHOD     ${options}      set_capability      enableVNC       true
+    #${prefs} =      Create Dictionary    download.folderList=2
+    ${prefs} =      Create Dictionary    profile.default_content_settings.popups=${0}   download.default_directory=${CURDIR}/../../../test_files   download.prompt_for_download=${False}   download.directory_upgrade=${True}
+    #${prefs} =      Create Dictionary    helperApps.neverAsk.saveToDisk=*
+    Call Method     ${options}    add_experimental_option    prefs    ${prefs}
+    
+    #Call Method    ${options}    add_argument    --lang\=${browser_locale}
+    #Call Method    ${options}    add_argument    --headless
+    #Call Method    ${options}    add_argument    --window-size\=1024,768
+    #Call Method    ${options}    add_argument    --disable-gpu
+    ${isWebdriverCreated} =    Run Keyword And Return Status    Create Webdriver    ${BROWSER}    chrome_options=${options}
+    #Run Keyword Unless    ${isWebdriverCreated}    Create Webdriver    ${BROWSER}    chrome_options=${options}
     
     #Run Keyword If    ${USE_PROXY}    Create Browser Proxy
     Run Keyword And Ignore Error        Delete All Cookies       #This code is added to handle situation where browser is open browser is used 

@@ -25,6 +25,7 @@ replay_pid*
 
 # logs and results files
 /results
+/test_files
 *report.html
 *output.xml
 *log.html
