@@ -7,6 +7,8 @@ Resource  ../../resources/components/admin/users/admin_users_page.robot
 Resource  ../../resources/components/admin/users/add_non_sso_users_page.robot
 Resource  ../../resources/utils/csv_utils.robot
 Resource  ../../resources/utils/email_utils.robot
+Resource  ../../resources/components/admin/users/member_import_preview_modal_page.robot
+Resource  ../../resources/components/login/onboarding_user_page.robot
 
 #################################################
 
@@ -40,5 +42,39 @@ Write Line To CSV User File Test
     Write Lines To CSV File                  ${CURDIR}/../../output/test_bulk_import_sample.csv     @{lines}
 
 Look For Invitation Email Test
+    [Tags]                                   regression  
     Wait For Invitation Link                 inviteedcastuser@gmail.com
+
+User Onboarding Test
+    [Tags]                                   regression  
+    [Teardown]                               Close Browser
+    ${users_csv_file_path}=                  Replace Variables        ${CURDIR}/../../output/test_bulk_import_sample.csv
+    ${new_user_firstname}=                   Generate Random String   5   abcdefghijklmnoprstuvwxyz
+    ${new_user_lastname}=                    Generate Random String   10
+    ${new_user_email}=                       Replace Variables        inviteedcastuser+${new_user_firstname}@gmail.com
+    ${user_full_line}=                       Replace Variables        ${new_user_firstname},${new_user_lastname},${new_user_email},,,Password@123
+    @{lines}=                                Create List   first_name,last_name,email,groups,picture_url,password    ${user_full_line}
+
+    Write Lines To CSV File                  ${users_csv_file_path}   @{lines}
+    Open Connection With Valid Credentials   ${USER_EMAIL_${ENV}}	  ${USER_PASSWORD_${ENV}}
+    Click More Button
+    Open Admin Console
+    Open Users Page
+    Click Add User Button
+    Upload Users File                        ${users_csv_file_path}
+    Click Preview Button
+    Member Import Preview Modal Should Be Open
+    Click Import Button
+    ${invitation_link}=                      Wait For Invitation Link   ${new_user_email}
+    Go To                                    ${invitation_link}
+    Check Sign Prompt Checkbox
+    Click Next Step Button
+    Type And Select User Interest Topic      Python
+    Select User Learning Level
+    Click Add Buttton
+    Click Next Step Button
+    Sleep                                    3s
+    Click Skip Buttton
+    Click Lets Get Started Button
+    Wait Until Location Does Not Contain     /onboarding       15s        Onboarding isn't completed.
 

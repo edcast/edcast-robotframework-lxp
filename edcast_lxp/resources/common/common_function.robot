@@ -72,6 +72,12 @@ Wait and Click
     Click Element								${locator}
 
 ###############################################################################################
+Wait and Check    
+    [Arguments]   ${locator}
+    Wait Until Element Is Visible               ${locator}         ${TIMEOUT}
+    Select Checkbox								${locator}
+
+###############################################################################################
 Wait and Type   
    [Arguments]     ${locator}     ${text}
    Wait Until Element Is Visible               ${locator}         ${TIMEOUT}
