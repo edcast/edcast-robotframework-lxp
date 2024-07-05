@@ -11,6 +11,9 @@ ${profile_dropdown_button}         //div[@class='dropdown-wrapper ed-header--pro
 ${more_button}                     //button[@aria-label='More options and features']
 ${create_button}                   //*[@id='createBtn']
 
+${me_tab}                          //a[@href="/me"]
+
+
 ###############################################################################################
 
 *** Keywords ***
@@ -23,3 +26,5 @@ Click Create Button
 Click More Button
   	Wait and Click   ${more_button}
 
+Click Me Tab
+  	Wait and Click   ${me_tab}

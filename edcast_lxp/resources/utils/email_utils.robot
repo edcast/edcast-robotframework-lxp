@@ -40,3 +40,11 @@ Wait For Invitation Link
     ${invitation_link}=        Get From List    ${links}   0
     [Return]                   ${invitation_link}
 
+Wait For Transcript PDF File
+    [Arguments]     ${recipient}
+    Open Mailbox    host=imap.gmail.com   user=${recipient}    password=ajwyqixmkbausfal   folder=Inbox
+    ${latest}=      Wait For Email    recipient=${recipient}     timeout=300    subject=yubnx, your PDF Transcript
+    ${transcript_files}=    Get Attachments From Email        email_index=${latest}      target_folder=${CURDIR}/../../../test_files
+    ${transcript_file}=     Get From List   ${transcript_files}   0
+    [Return]        ${transcript_file}
+    
