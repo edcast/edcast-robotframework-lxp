@@ -32,6 +32,7 @@ Verify Upload Smartcard Creation
     Select Duration                         1   20
     Set Privacy Settings                    Private
     Click Create Card Button
+    Wait For Private ard Has Been Created Toast Message
     Card With Title Should Be Present In Card List   ${card_title}
 
 Verify Upload Smartcard Image

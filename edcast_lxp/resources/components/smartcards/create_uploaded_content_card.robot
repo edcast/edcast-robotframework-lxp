@@ -7,21 +7,22 @@ Resource       ../../common/common_function.robot
 ###############################################################################################
 
 *** Variables ***
-${upload_file_button}     //button[@aria-label='Upload File Select Files to Upload required']
-${file_input}             //input[@id='fsp-fileUpload']
-${uploaded_image}         //img[@alt='User provided image']
-${title_input}            //input[@name='title']
-${description_input}      //div[@id='message']
-${skills_input}           //*[text()='Skills']/..//input
-${skills_option}          //div[starts-with(@class, 'ed-multi-select__option') and text()='%s']
-${tags_input}             //label[text()='Tags']/..//input
-${language_selector}      //select[@id='language']
-${content_type_selector}  //select[@id='contentType']
-${level_selector}         //label[text()='Level']/../select
-${hours_selector}         //select[@id='hours']
-${mins_selector}          //select[@id='mins']
-${privacy_radio_button}   //span[text()='%s']//preceding-sibling::input
-${create_card_button}     //button[@id='create-card-btn']
+${upload_file_button}                     //button[@aria-label='Upload File Select Files to Upload required']
+${file_input}                             //input[@id='fsp-fileUpload']
+${uploaded_image}                         //img[@alt='User provided image']
+${title_input}                            //input[@name='title']
+${description_input}                      //div[@id='message']
+${skills_input}                           //*[text()='Skills']/..//input
+${skills_option}                          //div[starts-with(@class, 'ed-multi-select__option') and text()='%s']
+${tags_input}                             //label[text()='Tags']/..//input
+${language_selector}                      //select[@id='language']
+${content_type_selector}                  //select[@id='contentType']
+${level_selector}                         //label[text()='Level']/../select
+${hours_selector}                         //select[@id='hours']
+${mins_selector}                          //select[@id='mins']
+${privacy_radio_button}                   //span[text()='%s']//preceding-sibling::input
+${create_card_button}                     //button[@id='create-card-btn']
+${private_card_created_toast_message}     //span[text()='Your private card has been created.']
 
 ###############################################################################################
 
@@ -88,4 +89,7 @@ Set Privacy Settings
 
 Click Create Card Button
     Wait and Click                     ${create_card_button}
+
+Wait For Private ard Has Been Created Toast Message
+    Wait Until Element Is Visible      ${private_card_created_toast_message}    error=Card created message doesn't appear
 
