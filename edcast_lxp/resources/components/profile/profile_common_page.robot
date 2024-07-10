@@ -11,6 +11,11 @@ ${skills_passport_tab}                  //button[@role='tab' and @aria-label='Sk
 ${learning_queue_tab}                   //button[@role='tab' and @aria-label='Learning Queue']
 
 ###############################################################################################
+
 *** Keywords ***
+
 Click Skills Passport Tab
    Wait and Click   ${skills_passport_tab}
+
+Click Content Tab
+   Wait and Click   ${content_tab}

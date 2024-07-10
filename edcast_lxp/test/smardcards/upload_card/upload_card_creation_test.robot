@@ -7,6 +7,8 @@ Resource  ../../../resources/components/smartcards/create_uploaded_content_card.
 Resource  ../../../resources/components/upload/upload_file_modal.robot
 Resource  ../../../resources/components/profile/content_page.robot
 Resource  ../../../resources/components/smartcards/card_details_page.robot
+Resource  ../../../resources/components/smartcards/card_actions_menu.robot
+Resource  ../../../resources/components/smartcards/assign_card_page.robot
 
 #################################################
 
@@ -32,7 +34,7 @@ Verify Upload Smartcard Creation
     Select Duration                         1   20
     Set Privacy Settings                    Private
     Click Create Card Button
-    Wait For Private ard Has Been Created Toast Message
+    Wait For Private Card Has Been Created Toast Message
     Card With Title Should Be Present In Card List   ${card_title}
 
 Verify Upload Smartcard Image
@@ -60,3 +62,30 @@ Verify Upload Smartcard Image
     Open Card From Content Page             ${card_title}
     ${test_card_image_path}=                Get Card Image
     Compare Images                          ${CURDIR}/../../../output/test_upload.png   ${test_card_image_path}   0.25
+
+Assign Upload Smartcard
+    [Tags]                                  regression
+    [Teardown]                              Close Browser
+    ${card_title}=                          Generate Random String
+    Open Connection With Valid Credentials  ${USER_EMAIL_${ENV}}   ${USER_PASSWORD_${ENV}}
+    Click Create Button
+    Click Smartcard Button
+    Click Uploaded Content Tab
+    Upload File Button Click               
+    Upload File                             ${CURDIR}/../../../output/test_upload.png
+    Click Upload Button
+    Wait Until Image Uploaded
+    Type Smart Card Title                   ${card_title}
+    Set Privacy Settings                    Private
+    Click Create Card Button
+    Wait For Private Card Has Been Created Toast Message
+    Card With Title Should Be Present In Card List   ${card_title}
+    Open Card From Content Page             ${card_title}
+    Open SmartCard Actions Menu
+    Click Assign Button
+    Search For User To Assign               Danish
+    ${today_date}=                          Get Today Date
+    Select Start Date                       ${today_date}
+    ${tomorrow_date}=                       Get Tomorrow Date
+    Select Due Date                         ${tomorrow_date}
+    Click Assign Button On Assign Page

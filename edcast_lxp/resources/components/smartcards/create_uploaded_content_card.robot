@@ -34,6 +34,7 @@ Upload File
     [Arguments]                        ${file_path}
     Wait Until Page Contains Element   ${file_input}
   	Choose File                        ${file_input}            ${file_path}
+    Sleep                              5s
 
 Wait Until Image Uploaded
     Wait Until Page Contains Element   ${uploaded_image}        15s
@@ -90,6 +91,6 @@ Set Privacy Settings
 Click Create Card Button
     Wait and Click                     ${create_card_button}
 
-Wait For Private ard Has Been Created Toast Message
+Wait For Private Card Has Been Created Toast Message
     Wait Until Element Is Visible      ${private_card_created_toast_message}    error=Card created message doesn't appear
 

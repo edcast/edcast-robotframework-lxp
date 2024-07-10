@@ -1,9 +1,7 @@
 *** Settings ***
 Library	 	Collections
 Library		String
-Library 	OperatingSystem
-Library     BuiltIn
-Library		DateTime
+Library 	   OperatingSystem
 
 *** Variables ***
 

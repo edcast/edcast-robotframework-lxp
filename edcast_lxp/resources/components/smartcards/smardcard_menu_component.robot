@@ -1,6 +1,6 @@
 *** Settings ***
 
-Documentation  Locators with respect profile menu navigation functionality
+Documentation  Locators with respect card varians menu functionality
 
 Resource       ../../common/common_function.robot
 
