@@ -12,6 +12,7 @@ ${found_user_checkbox}                 //div[contains(text(), '%s')]/ancestor::t
 ${start_date_button}                   //div[@class='date-picker' and text()='Start Date: ']
 ${due_date_button}                     //div[@class='date-picker' and text()='Due Date: ']
 ${assign_button}                       //button[text()='Assign']
+${card_assigned_message}               //span[starts-with(text(), 'You have assigned this SmartCard to ')]
 
 ###############################################################################################
 
@@ -40,4 +41,7 @@ Search For User To Assign
 
 Click Assign Button On Assign Page
     Wait and Click                   ${assign_button}
+
+Wait For Card Assigned To User Toast Message
+    Wait Until Element Is Visible      ${card_assigned_message}     error=Card assigning message doesn't appear
 

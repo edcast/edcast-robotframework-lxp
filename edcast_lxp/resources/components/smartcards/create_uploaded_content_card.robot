@@ -3,6 +3,9 @@
 Documentation  Locators with respect profile menu navigation functionality
 
 Resource       ../../common/common_function.robot
+Resource       ../../components/nav_header/create_menu.robot
+Resource       ../../components/smartcards/smardcard_menu_component.robot
+Resource       ../../components/upload/upload_file_modal.robot
 
 ###############################################################################################
 
@@ -23,6 +26,7 @@ ${mins_selector}                          //select[@id='mins']
 ${privacy_radio_button}                   //span[text()='%s']//preceding-sibling::input
 ${create_card_button}                     //button[@id='create-card-btn']
 ${private_card_created_toast_message}     //span[text()='Your private card has been created.']
+${public_card_created_toast_message}      //span[text()='Your card has been published publicly and will be accessible to everyone.']
 
 ###############################################################################################
 
@@ -34,7 +38,6 @@ Upload File
     [Arguments]                        ${file_path}
     Wait Until Page Contains Element   ${file_input}
   	Choose File                        ${file_input}            ${file_path}
-    Sleep                              5s
 
 Wait Until Image Uploaded
     Wait Until Page Contains Element   ${uploaded_image}        15s
@@ -92,5 +95,30 @@ Click Create Card Button
     Wait and Click                     ${create_card_button}
 
 Wait For Private Card Has Been Created Toast Message
-    Wait Until Element Is Visible      ${private_card_created_toast_message}    error=Card created message doesn't appear
+    Wait Until Element Is Visible      ${private_card_created_toast_message}    error=Card creation message doesn't appear
+
+Wait For Public Card Has Been Created Toast Message
+    Wait Until Element Is Visible      ${public_card_created_toast_message}     error=Card creation message doesn't appear
+
+Create Upload Card
+    [Arguments]                             &{card_details} 
+    Click Create Button
+    Click Smartcard Button
+    Click Uploaded Content Tab
+    Upload File Button Click
+    Upload File                             ${CURDIR}/../../../output/test_upload.png
+    Wait Until Back Button Is Present
+    Click Upload Button
+    Wait Until Image Uploaded
+    ${are_skill_names_added}=           Run Keyword And Return Status           Get From Dictionary     ${card_details}   skill_names   @{Empty}
+    ${are_tag_names_added}=             Run Keyword And Return Status           Get From Dictionary     ${card_details}   tags_names    @{Empty}
+    Run Keyword If  '${card_details.get("smartcard_title")}'!='${None}'         Type Smart Card Title                   ${card_details.get("smartcard_title")}
+    Run Keyword If  '${card_details.get("smartcard_decription")}'!='${None}'    Type Smart Card Description             ${card_details.get("smartcard_decription")}
+    Run Keyword If  '${are_skill_names_added}'=='${True}'                       Select Skills                           @{card_details.get("skill_names")}
+    Run Keyword If  '${are_tag_names_added}'=='${True}'                         Type Tags                               @{card_details.get("tags_names")}
+    Run Keyword If  '${card_details.get("language_name")}'!='${None}'           Select Language                         ${card_details.get("language_name")}
+    Run Keyword If  '${card_details.get("content_type_name")}'!='${None}'       Select Content Type                     ${card_details.get("content_type_name")}
+    Run Keyword If  '${card_details.get("hours")}'!='${None}'                   Select Duration                         ${card_details.get("hours")}   ${card_details.get("mins")}
+    Run Keyword If  '${card_details.get("privacy_setting")}'!='${None}'         Set Privacy Settings                    ${card_details.get("privacy_setting")}
+    Click Create Card Button
 
