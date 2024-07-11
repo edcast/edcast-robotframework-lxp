@@ -7,11 +7,21 @@ Resource       ../../common/common_function.robot
 ###############################################################################################
 
 *** Variables ***
-${uploaded_content_tab}         //*[text()='Uploaded Content']/..
+
+${card_type_tab}                //*[text()='%s' and @class='tab-label']/..
 
 ###############################################################################################
 
 *** Keywords ***
+
+Select Smartcard Type
+    [Arguments]                 ${type_name}
+    ${card_type_locator}        Replace String   ${card_type_tab}   %s   ${type_name}
+    Wait and Click              ${card_type_locator}
+
 Click Uploaded Content Tab
-  	Wait and Click   ${uploaded_content_tab} 
+    Run Keyword                 Select Smartcard Type      Uploaded Content
+
+Click Text Card Tab
+    Run Keyword                 Select Smartcard Type      Text Card
 

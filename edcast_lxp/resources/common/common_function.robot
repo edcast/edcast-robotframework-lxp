@@ -81,6 +81,7 @@ Wait and Check
 Wait and Type   
    [Arguments]     ${locator}     ${text}
    Wait Until Element Is Visible               ${locator}         ${TIMEOUT}
+   Clear Element Text                          ${locator}
    Input Text                                  ${locator}         ${text}
 
 ###############################################################################################

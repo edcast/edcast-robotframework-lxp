@@ -13,7 +13,6 @@ Resource  ../../../resources/components/smartcards/assign_card_page.robot
 Verify Upload Smartcard Creation
     [Tags]                                  regression
     [Teardown]                              Close Browser
-    ${card_title}=                          Generate Random String
     Open Connection With Valid Credentials  ${USER_EMAIL_${ENV}}   ${USER_PASSWORD_${ENV}}
     ${card_title}=                          Generate Random String
     @{skill_names}=                         Create List   Kubernetes   Python
@@ -45,8 +44,8 @@ Verify Upload Smartcard Image
 Verify Of Assigning For Upload Smartcard
     [Tags]                                  regression
     [Teardown]                              Close Browser
-    ${card_title}=                          Generate Random String
     Open Connection With Valid Credentials  ${USER_EMAIL_${ENV}}   ${USER_PASSWORD_${ENV}}
+    ${card_title}=                          Generate Random String
     &{card_details}=                        Create Dictionary   smartcard_title=${card_title}   privacy_setting=Private
     Create Upload Card                      &{card_details}
     Wait For Private Card Has Been Created Toast Message
