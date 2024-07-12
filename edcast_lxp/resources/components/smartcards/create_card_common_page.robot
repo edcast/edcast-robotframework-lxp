@@ -4,7 +4,7 @@ Documentation  Locators with respect upload card creation
 
 Resource       ../../common/common_function.robot
 Resource       ../../components/nav_header/create_menu.robot
-Resource       ../../components/smartcards/smardcard_menu_component.robot
+Resource       ../../components/smartcards/create_smartcard.robot
 
 ###############################################################################################
 

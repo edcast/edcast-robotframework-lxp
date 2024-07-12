@@ -19,18 +19,16 @@ Verify Drag And Drop Smartcards While Pathway Creation
     Type Pathway Title                       ${pathway_title}
     Click Continue With Pathway Creation Button
     Click Create New Smartcard Button
-    #${card_title_1}=                        Generate Random String
-    ${card_title_1}=                         Set Variable     Test1
+    ${card_title_1}=                         Generate Random String
     Click Text Card Tab
-    Type Smart Card Title                     ${card_title_1}
+    Type Smart Card Title                    ${card_title_1}
     Click Create Card Button
     Click Create New Smartcard Button
-    #${card_title_2}=                        Generate Random String
-    ${card_title_2}=                          Set Variable     Test2
+    ${card_title_2}=                         Generate Random String
     Click Text Card Tab
-    Type Smart Card Title                     ${card_title_2}
+    Type Smart Card Title                    ${card_title_2}
     Click Create Card Button
-    Drag And Drop Smartcards Inside Pathway   ${card_title_1}   ${card_title_2}
-    @{changed_cards}=                         Get Pathway Smartcard Titles
-    ${index_of_changed_card}=                 Get Index From List   ${changed_cards}   ${card_title_2}
-    Should Be Equal As Integers               ${index_of_changed_card}   0   msg=Card position isn't changed after drag and drop
+    Drag And Drop Smartcards Inside Pathway  ${card_title_1}   ${card_title_2}
+    @{changed_cards}=                        Get Pathway Smartcard Titles
+    ${index_of_changed_card}=                Get Index From List   ${changed_cards}   ${card_title_2}
+    Should Be Equal As Integers              ${index_of_changed_card}   0   msg=Card position isn't changed after drag and drop
