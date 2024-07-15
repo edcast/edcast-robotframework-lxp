@@ -33,35 +33,25 @@ Logout User
   	Click Sign Out Button
     Wait Until Location Contains    /user/login       15s        User doesn't log out
   
- ############################################################################################### 
+############################################################################################### 
 Open Browser To Page	
-    [Arguments]    ${BROWSER}
-	Log    Opening Browser ${BROWSER} to URL: ${LOGIN_URL_${ENV}}    console=yes
+    [Arguments]    ${browser}
+	Log    Opening Browser ${browser} to URL: ${LOGIN_URL_${ENV}}    console=yes
     ${desire_capabilities}=    Set Variable    ${EMPTY}
-    ${SELENIUM_GRID_HUB}=        Set Variable If        "${BROWSER}"=="edge"         http://localhost:9515         ${SELENIUM_GRID_HUB}          
+    ${SELENIUM_GRID_HUB}=        Set Variable If        "${browser}"=="edge"         http://localhost:9515         ${SELENIUM_GRID_HUB}          
     Set Suite Variable    ${desire_capabilities}
+    Open Browser      ${LOGIN_URL_${ENV}}    ${browser}    None    ${SELENIUM_GRID_HUB}    ${desire_capabilities}    ${FF_PROFILE}
+    Maximize Browser Window
+    Set Selenium Implicit Wait    1s
 
-    #${options} =    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    #CALL METHOD     ${options}      set_capability      enableVideo     true
-    #CALL METHOD     ${options}      set_capability      enableVNC       true
-
-    ${options} =    Evaluate    sys.modules['selenium.webdriver'].ChromeOptions()    sys, selenium.webdriver
-    #${prefs} =      Create Dictionary    download.folderList=2
-    ${prefs} =      Create Dictionary    profile.default_content_settings.popups=${0}   download.default_directory=${CURDIR}/../../../test_files   download.prompt_for_download=${False}   download.directory_upgrade=${True}
-    #${prefs} =      Create Dictionary    helperApps.neverAsk.saveToDisk=*
-    Call Method     ${options}    add_experimental_option    prefs    ${prefs}
-    
-    #Call Method    ${options}    add_argument    --lang\=${browser_locale}
-    #Call Method    ${options}    add_argument    --headless
-    #Call Method    ${options}    add_argument    --window-size\=1024,768
-    #Call Method    ${options}    add_argument    --disable-gpu
-    ${isWebdriverCreated} =    Run Keyword And Return Status    Create Webdriver    ${BROWSER}    chrome_options=${options}
-    #Run Keyword Unless    ${isWebdriverCreated}    Create Webdriver    ${BROWSER}    chrome_options=${options}
-    
-    #Run Keyword If    ${USE_PROXY}    Create Browser Proxy
-    Run Keyword And Ignore Error        Delete All Cookies       #This code is added to handle situation where browser is open browser is used 
-    Open Browser      ${LOGIN_URL_${ENV}}    ${BROWSER}    None    ${SELENIUM_GRID_HUB}    ${desire_capabilities}    ${FF_PROFILE}     ${options}   # #
-    #Run Keyword If    ${USE_PROXY}    Initiate HAR
+ ############################################################################################### 
+Open Connection With Browser Aliases To Page	
+    [Arguments]    ${browser}   ${alias}
+	Log    Opening Browser ${browser} to URL: ${LOGIN_URL_${ENV}}    console=yes
+    ${desire_capabilities}=    Set Variable    ${EMPTY}
+    ${SELENIUM_GRID_HUB}=        Set Variable If        "${browser}"=="edge"         http://localhost:9515         ${SELENIUM_GRID_HUB}          
+    Set Suite Variable    ${desire_capabilities}
+    Open Browser      ${LOGIN_URL_${ENV}}    ${browser}    ${alias}    ${SELENIUM_GRID_HUB}    ${desire_capabilities}    ${FF_PROFILE}
     Maximize Browser Window
     Set Selenium Implicit Wait    1s
 
