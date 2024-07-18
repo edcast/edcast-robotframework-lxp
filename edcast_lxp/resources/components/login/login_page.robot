@@ -27,7 +27,7 @@ Type User Password
   	Wait and Type    ${password_input}    ${user_password}
 
 Select Terms And Conditions Checkbox
-    Select Checkbox  ${terms_and_conditions_checkbox}
+    Run Keyword And Ignore Error   Select Checkbox  ${terms_and_conditions_checkbox}
 
 Click Log In Buttton
     Wait and Click   ${login_button} 

@@ -1,7 +1,7 @@
 *** Settings ***
 
 Resource  ../../../resources/common/common_import.robot
-Resource  ../../../resources/components/smartcards/create_uploaded_content_card.robot
+Resource  ../../../resources/components/smartcards/create_smartcard.robot
 Resource  ../../../resources/components/profile/content_page.robot
 Resource  ../../../resources/components/smartcards/card_details_page.robot
 Resource  ../../../resources/components/smartcards/card_actions_menu.robot
