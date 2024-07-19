@@ -10,7 +10,7 @@ Resource  ../../resources/utils/email_utils.robot
 #################################################
 
 *** Test Cases ***
-Download Sample User File Test
+Download User Transcription File Test
     [Tags]                                  regression
     [Teardown]                              Close Browser
     Open Connection With Valid Credentials  inviteedcastuser+yubnx@gmail.com	 ${USER_PASSWORD_${ENV}}

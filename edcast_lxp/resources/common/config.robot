@@ -8,7 +8,7 @@ Library		DateTime
 
 *** Variables ***
 #${IMAGE_COMPARATOR_COMMAND}   /opt/homebrew/Cellar/imagemagick/7.1.1-33/bin/convert expected_image_path tested_image_path -metric RMSE -compare -format  "%[distortion]" info:
-${IMAGE_COMPARATOR_COMMAND}   /usr/local/Cellar/imagemagick/7.1.1-33/bin/magick expected_image_path tested_image_path -metric RMSE -compare -format  "%[distortion]" info:
+${IMAGE_COMPARATOR_COMMAND}   /usr/local/bin/magick expected_image_path tested_image_path -metric RMSE -compare -format  "%[distortion]" info:
 ${TIMEOUT}			          60s
 ${DEFAULT_LOG_LEVEL}	      INFO
 ${BROWSER}                    chrome

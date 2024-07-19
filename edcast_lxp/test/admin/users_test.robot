@@ -25,7 +25,8 @@ Download Sample User File Test
     Wait Until Keyword Succeeds              
     ...    30s
     ...    3s
-    ...    File Should Exist                 ${CURDIR}/../../../test_files/bulk_import_sample.csv   File isn't downloaded
+    #...    File Should Exist                 ${CURDIR}/../../../test_files/bulk_import_sample.csv   File isn't downloaded
+    ...    File Should Exist                 /Users/anazarenko/Downloads/bulk_import_sample.csv     File isn't downloaded
 
 Read CSV User File Test
     [Tags]                                   regression
