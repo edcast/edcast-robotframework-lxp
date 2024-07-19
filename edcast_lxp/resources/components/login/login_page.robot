@@ -13,6 +13,7 @@ ${username_input}                  //*[@id="email"]
 ${password_input}                  //*[@id="password"]
 ${terms_and_conditions_checkbox}   //*[@id='tandc']
 ${login_button}                    //button[@type="submit" and not(@disabled)]
+${login_error}                     //div[starts-with(@class, 'login--error-block')]
 
 ###############################################################################################
 
@@ -31,3 +32,6 @@ Select Terms And Conditions Checkbox
 
 Click Log In Buttton
     Wait and Click   ${login_button} 
+
+Wait For Login Error Visiblity
+    Wait Until Element Is Visible        ${login_error}    error=Error doesn't appear.
