@@ -11,7 +11,7 @@ Login to LXP with new browser
 ############################################################################################### 
 Logout from LXP
     [Tags]                                  regression
-	Logout User
+	Logout User   
 ############################################################################################### 
 Login with any using with same session
     [Tags]                                  regression
@@ -40,3 +40,17 @@ Verify Login Into Different Browsers With Session Expiring
     Switch Browser                          browser1
     Click Me Tab
     Wait Until Location Contains            /log_in    60s    User isn't log out.
+############################################################################################### 
+Verify Switching Between Tabs 
+    [Tags]                                  regression
+    [Teardown]                              Close All Browsers
+    Set Test Variable                       ${ENV}    PREVIEW
+    Open Connection With Valid Credentials  ${USER_EMAIL_${ENV}}	 ${USER_PASSWORD_${ENV}}
+    Execute Javascript                      window.open('')
+    @{window_titles}=                       Get Window Titles
+    Log List                                ${window_titles}
+    Switch Window                           title=undefined
+    Go To                                   ${LOGIN_URL_QATRAUTOMATIONV11}
+    Wait Until Location Contains            ${LOGIN_URL_QATRAUTOMATIONV11}    60s    User isn't switched on new opened tab.
+    Switch Window                           title=homepage - picassov3uspreview
+    Wait Until Location Contains            ${LOGIN_URL_PREVIEW}    60s    User isn't switched on previous opened tab.
