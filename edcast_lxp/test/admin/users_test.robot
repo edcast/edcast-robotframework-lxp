@@ -79,3 +79,23 @@ User Onboarding Test
     Click Lets Get Started Button
     Wait Until Location Does Not Contain     /onboarding       15s        Onboarding isn't completed.
 
+Read CSV File Test With Errors
+    [Tags]                                   regression
+    [Documentation]                          Negative cases to check how catching errors works
+    [Teardown]                               Run Keyword If Timeout Occurred          Log To Console        This text won't be in console as timeout error isn't reached.
+    Log To Console                           Catching errors by 'Run Keyword And Expect Error' keyword
+    ${msg}=    Run Keyword And Expect Error  *      Read CSV File        ${CURDIR}/../../output/incorrect_file_name.csv
+    Should Contain                           ${msg}    FileNotFoundError
+
+    Log To Console                           Catching errors by 'Run Keyword And Ignore Error' keyword
+    Run Keyword And Ignore Error             Read CSV File        incorrect_file_path
+
+    Log To Console                           Avoid errors by 'Run Keyword And Ignore Error' and 'Wait Until Keyword Succeeds' keyword
+    Run Keyword And Ignore Error	         Wait Until Keyword Succeeds	1s	3s	My keyword
+
+    Log To Console                           Generating error
+    TRY
+       Read CSV File                            incorrect_file_path
+    EXCEPT   AS    ${message}
+       Log to console    Error occurred: ${message}
+    END
