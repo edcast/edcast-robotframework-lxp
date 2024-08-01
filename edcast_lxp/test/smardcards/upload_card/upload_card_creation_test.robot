@@ -7,7 +7,7 @@ Resource  ../../../resources/components/smartcards/card_details_page.robot
 Resource  ../../../resources/components/smartcards/card_actions_menu.robot
 Resource  ../../../resources/components/smartcards/assign_card_page.robot
 
-Library   AutoRecorder      mode=suite
+Library   AutoRecorder      mode=test
 
 #################################################
 

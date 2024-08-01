@@ -6,7 +6,7 @@ Resource  ../../resources/components/profile/profile_common_page.robot
 Resource  ../../resources/components/profile/skills_passport_profile_page.robot
 Resource  ../../resources/utils/email_utils.robot
 
-Library   AutoRecorder      mode=suite
+Library   AutoRecorder      mode=test
 
 #################################################
 

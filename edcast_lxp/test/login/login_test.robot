@@ -2,7 +2,7 @@
 
 Resource  ../../resources/common/common_import.robot
 
-Library   AutoRecorder      mode=suite
+Library   AutoRecorder      mode=test
 
 #################################################
 

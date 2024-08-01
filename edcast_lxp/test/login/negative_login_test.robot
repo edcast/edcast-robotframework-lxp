@@ -1,6 +1,6 @@
 *** Settings ***
 Resource         ../../resources/common/common_import.robot
-Library          AutoRecorder      mode=suite
+Library          AutoRecorder      mode=test
 
 Test Template    Login with invalid credentials should fail
 

@@ -3,7 +3,7 @@
 Resource  ../../../resources/common/common_import.robot
 Resource  ../../../resources/components/smartcards/create_smartcard.robot
 
-Library   AutoRecorder      mode=suite
+Library   AutoRecorder      mode=test
 
 #################################################
 
