@@ -10,6 +10,8 @@ Resource  ../../resources/utils/email_utils.robot
 Resource  ../../resources/components/admin/users/member_import_preview_modal_page.robot
 Resource  ../../resources/components/login/onboarding_user_page.robot
 
+Library   AutoRecorder      mode=suite
+
 #################################################
 
 *** Test Cases ***

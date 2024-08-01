@@ -2,6 +2,8 @@
 
 Resource  ../../resources/common/common_import.robot
 
+Library   AutoRecorder      mode=suite
+
 #################################################
 
 *** Test Cases ***
